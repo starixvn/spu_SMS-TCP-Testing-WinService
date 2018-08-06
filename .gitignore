@@ -53,3 +53,5 @@
 /ChatLibrary/obj/Debug/ChatLibrary.csprojAssemblyReference.cache
 /ChatLibrary/obj/Debug/ChatLibrary.dll
 /ChatLibrary/obj/Debug/ChatLibrary.pdb
+/Server/.vs/Server/DesignTimeBuild/.dtbcache
+/Server/.vs/Server/v15/Server/sqlite3/db.lock
