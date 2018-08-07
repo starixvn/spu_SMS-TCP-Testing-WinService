@@ -14,17 +14,23 @@ namespace Server
     {
         bool blnStartStop;
         ServiceHost host;
-        ChatService cs = new ChatService();
+        ChatService cs;
 
         public MainService()
         {
             InitializeComponent();
+
+            cs = new ChatService();
         }
 
         protected override void OnStart(string[] args)
         {
             host = new ServiceHost(typeof(Server.ChatService));
-            host.Open();
+
+            if (host.State == CommunicationState.Closed)
+            {
+                host.Open();
+            }
         }
 
         protected override void OnStop()
