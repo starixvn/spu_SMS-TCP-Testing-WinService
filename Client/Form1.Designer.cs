@@ -67,6 +67,8 @@
             this.txtMsgs.Location = new System.Drawing.Point(1, 31);
             this.txtMsgs.Multiline = true;
             this.txtMsgs.Name = "txtMsgs";
+            this.txtMsgs.ReadOnly = true;
+            this.txtMsgs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtMsgs.Size = new System.Drawing.Size(333, 199);
             this.txtMsgs.TabIndex = 3;
             // 

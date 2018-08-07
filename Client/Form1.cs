@@ -15,13 +15,13 @@ namespace Client
     {
         ReceiveClient rc = null;
         string myName;
-       
+
         public frmClient()
         {
             InitializeComponent();
-            this.FormClosing+=new FormClosingEventHandler(frmClient_FormClosing);
+            this.FormClosing += new FormClosingEventHandler(frmClient_FormClosing);
             this.txtSend.KeyPress += new KeyPressEventHandler(txtSend_KeyPress);
-            
+
         }
 
         void txtSend_KeyPress(object sender, KeyPressEventArgs e)
@@ -33,9 +33,11 @@ namespace Client
                 var message = EncryptString.Encrypt(txtSend.Text);
 
                 SendMessage(message);
+
+
             }
-                
-            
+
+
         }
 
         private void frmClient_FormClosing(object sender, EventArgs e)
@@ -53,8 +55,9 @@ namespace Client
         void rc_ReceiveMsg(string sender, string msg)
         {
             if (msg.Length > 0)
-            { 
-                txtMsgs.Text +=Environment.NewLine + sender +">"+ EncryptString.Decrypt(msg);
+            {
+                //txtMsgs.Text +=Environment.NewLine + sender +"> "+ EncryptString.Decrypt(msg) + Environment.NewLine + "------------";
+                txtMsgs.Text = txtMsgs.Text.Insert(0, Environment.NewLine + sender + "> " + EncryptString.Decrypt(msg) + Environment.NewLine + "------------");
             }
         }
 
@@ -63,7 +66,7 @@ namespace Client
             lstClients.Items.Clear();
             foreach (string name in names)
             {
-                if (name!=myName)
+                if (name != myName)
                     lstClients.Items.Add(name);
             }
         }
@@ -79,12 +82,13 @@ namespace Client
         {
             if (lstClients.Items.Count != 0)
             {
-                txtMsgs.Text += Environment.NewLine + myName + ">" + txtSend.Text;
+                //txtMsgs.Text += Environment.NewLine + myName + "> " + txtSend.Text + Environment.NewLine + "------------";
+                txtMsgs.Text = txtMsgs.Text.Insert(0, Environment.NewLine + myName + "> " + txtSend.Text + Environment.NewLine + "------------");
                 if (lstClients.SelectedItems.Count == 0)
                     rc.SendMessage(message, myName, lstClients.Items[0].ToString());
                 else
                     if (!string.IsNullOrEmpty(lstClients.SelectedItem.ToString()))
-                        rc.SendMessage(message, myName, lstClients.SelectedItem.ToString());
+                    rc.SendMessage(message, myName, lstClients.SelectedItem.ToString());
 
                 txtSend.Clear();
             }
@@ -115,5 +119,5 @@ namespace Client
         }
 
     }
-   
+
 }
