@@ -20,9 +20,12 @@ namespace Client
 
         public void Start(ReceiveClient rc, string name)
         {
-            inst = new InstanceContext(rc);
-            chatClient = new ChatService.SendChatServiceClient(inst);
-            chatClient.Start(name);
+            if (chatClient == null || chatClient.State == CommunicationState.Faulted)
+            {
+                inst = new InstanceContext(rc);
+                chatClient = new ChatService.SendChatServiceClient(inst);
+                chatClient.Start(name);
+            }
         }
 
         public void SendMessage(string msg, string sender, string receiver)
@@ -32,7 +35,8 @@ namespace Client
 
         public void Stop(string name)
         {
-            chatClient.Stop(name);
+            if (chatClient.State != CommunicationState.Faulted)
+                chatClient.Stop(name);
         }
 
         void ChatService.ISendChatServiceCallback.ReceiveMessage(string msg, string receiver)
