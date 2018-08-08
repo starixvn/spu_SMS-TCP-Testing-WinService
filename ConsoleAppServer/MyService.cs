@@ -39,7 +39,7 @@ namespace ConsoleAppServer
         private void StartService()
         {
             int count = 1;
-            ServerSocket = new TcpListener(IPAddress.Any, 5000);
+            ServerSocket = new TcpListener(IPAddress.Any, 1234);
             ServerSocket.Start();
 
             while (true)

@@ -24,28 +24,14 @@ namespace ClientChat
         NetworkStream ns;
         private void Form1_Load(object sender, EventArgs e)
         {
-            IPAddress ip = IPAddress.Parse("127.0.0.1");
-            int port = 5000;
+            IPAddress ip = IPAddress.Parse("10.18.200.120");
+            int port = 1234;
             client = new TcpClient();
             client.Connect(ip, port);
-            //Console.WriteLine("client connected!!");
             
             thread = new Thread(o => ReceiveData((TcpClient)o));
 
             thread.Start(client);
-
-            //string s;
-            //while (!string.IsNullOrEmpty((s = Console.ReadLine())))
-            //{
-            //    byte[] buffer = Encoding.ASCII.GetBytes(s);
-            //    ns.Write(buffer, 0, buffer.Length);
-            //}
-
-           
-           // ns.Close();
-            
-           // Console.WriteLine("disconnect from server!!");
-           // Console.ReadKey();
         }
 
         void ReceiveData(TcpClient client)
